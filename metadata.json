@@ -1,0 +1,5 @@
+{
+  "name": "DartsMaster Scorer",
+  "description": "A comprehensive, responsive darts scoring application with 301/501 modes, detailed history, and post-game heatmap analytics.",
+  "requestFramePermissions": []
+}
