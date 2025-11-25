@@ -61,18 +61,18 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
       }
 
       // GHOST BOARD LOOK (Empty State)
-      // Lightened slightly (Slate 700/600) so that "Black" (6 hits) stands out as distinct
+      // Adjusted to Mid-Grey (Slate 500/600) to allow contrast for BOTH Pastel (Light) and Black (Dark)
       const isDark = sliceIndex % 2 !== 0;
       
       if (multiplier === Multiplier.Double || multiplier === Multiplier.Triple) {
-        // Rings usually have color
-        return isDark ? '#334155' : '#475569'; // Slate 700 / Slate 600
+        // Rings
+        return isDark ? '#475569' : '#64748b'; // Slate 600 / Slate 500
       }
       // Singles
-      return isDark ? '#1e293b' : '#334155'; // Slate 800 / Slate 700
+      return isDark ? '#334155' : '#475569'; // Slate 700 / Slate 600
     };
 
-    const wireColor = '#cbd5e1'; // Slate 300 (Light Metallic) to contrast against Black
+    const wireColor = '#cbd5e1'; // Slate 300 (Light Metallic)
     const wireWidth = 1;
 
     // 1. Draw Number Ring Background
@@ -84,7 +84,7 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
 
     svg.append('path')
       .attr('d', arcNumberRing)
-      .attr('fill', '#020617') // Almost black for numbers background
+      .attr('fill', '#0f172a') // Slate 900 for numbers background
       .attr('stroke', 'none');
 
     const sliceAngle = (2 * Math.PI) / 20;
@@ -142,7 +142,7 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
     // Outer Bull (25) - Single
     const outerBullHits = getHitCount(25, Multiplier.Single);
     // Default ghost outer bull
-    let outerBullColor = '#334155';
+    let outerBullColor = '#475569'; // Slate 600
     if (outerBullHits > 0) {
         outerBullColor = HEATMAP_COLORS[Math.min(outerBullHits, 6) as keyof typeof HEATMAP_COLORS];
     }
@@ -156,7 +156,7 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
     // Inner Bull (50) - Double
     const innerBullHits = getHitCount(25, Multiplier.Double);
     // Default ghost inner bull
-    let innerBullColor = '#475569'; 
+    let innerBullColor = '#64748b'; // Slate 500
     if (innerBullHits > 0) {
         innerBullColor = HEATMAP_COLORS[Math.min(innerBullHits, 6) as keyof typeof HEATMAP_COLORS];
     }
