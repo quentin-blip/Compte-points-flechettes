@@ -61,18 +61,20 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
       }
 
       // GHOST BOARD LOOK (Empty State)
-      // Adjusted to Mid-Grey (Slate 500/600) to allow contrast for BOTH Pastel (Light) and Black (Dark)
+      // For Light Mode UI, we still need a "darkish" board for the pastels to pop, 
+      // otherwise yellow on white is invisible.
+      // We use Slate 600/700 for the ghost board to look like a "neutral" dartboard.
       const isDark = sliceIndex % 2 !== 0;
       
       if (multiplier === Multiplier.Double || multiplier === Multiplier.Triple) {
         // Rings
-        return isDark ? '#475569' : '#64748b'; // Slate 600 / Slate 500
+        return isDark ? '#64748b' : '#94a3b8'; // Slate 500 / Slate 400
       }
       // Singles
-      return isDark ? '#334155' : '#475569'; // Slate 700 / Slate 600
+      return isDark ? '#475569' : '#64748b'; // Slate 600 / Slate 500
     };
 
-    const wireColor = '#cbd5e1'; // Slate 300 (Light Metallic)
+    const wireColor = '#e2e8f0'; // Slate 200 (Light wire)
     const wireWidth = 1;
 
     // 1. Draw Number Ring Background
@@ -84,7 +86,7 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
 
     svg.append('path')
       .attr('d', arcNumberRing)
-      .attr('fill', '#0f172a') // Slate 900 for numbers background
+      .attr('fill', '#1e293b') // Slate 800 (Dark Ring)
       .attr('stroke', 'none');
 
     const sliceAngle = (2 * Math.PI) / 20;
@@ -130,7 +132,7 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
         .attr('transform', `rotate(${angleDeg}) translate(0, -${labelRadius}) rotate(${-angleDeg})`)
         .attr('text-anchor', 'middle')
         .attr('dominant-baseline', 'central')
-        .attr('fill', '#94a3b8')
+        .attr('fill', '#f8fafc')
         .attr('font-family', 'sans-serif')
         .attr('font-weight', 'bold')
         .attr('font-size', '16px')
@@ -142,7 +144,7 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
     // Outer Bull (25) - Single
     const outerBullHits = getHitCount(25, Multiplier.Single);
     // Default ghost outer bull
-    let outerBullColor = '#475569'; // Slate 600
+    let outerBullColor = '#64748b'; // Slate 500
     if (outerBullHits > 0) {
         outerBullColor = HEATMAP_COLORS[Math.min(outerBullHits, 6) as keyof typeof HEATMAP_COLORS];
     }
@@ -156,7 +158,7 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
     // Inner Bull (50) - Double
     const innerBullHits = getHitCount(25, Multiplier.Double);
     // Default ghost inner bull
-    let innerBullColor = '#64748b'; // Slate 500
+    let innerBullColor = '#94a3b8'; // Slate 400
     if (innerBullHits > 0) {
         innerBullColor = HEATMAP_COLORS[Math.min(innerBullHits, 6) as keyof typeof HEATMAP_COLORS];
     }
@@ -169,5 +171,5 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
 
   }, [history, playerId]);
 
-  return <svg ref={svgRef} className="w-full max-w-[360px] h-auto mx-auto drop-shadow-2xl" />;
+  return <svg ref={svgRef} className="w-full max-w-[360px] h-auto mx-auto drop-shadow-xl" />;
 };

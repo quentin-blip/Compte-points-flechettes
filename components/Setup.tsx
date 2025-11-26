@@ -45,21 +45,21 @@ export const Setup: React.FC<SetupProps> = ({ onStartGame }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-slate-800 rounded-xl shadow-2xl border border-slate-700">
-      <h1 className="text-3xl font-bold text-center text-emerald-400 mb-8 tracking-tight">New Game</h1>
+    <div className="max-w-md w-full mx-auto p-6 bg-white rounded-2xl shadow-xl border border-slate-100">
+      <h1 className="text-3xl font-bold text-center text-emerald-500 mb-8 tracking-tight">New Game</h1>
       
       {/* Score Selection */}
       <div className="mb-6">
-        <label className="block text-slate-400 mb-2 text-sm uppercase font-semibold tracking-wider">Starting Score</label>
+        <label className="block text-slate-500 mb-2 text-xs uppercase font-bold tracking-wider">Starting Score</label>
         <div className="flex gap-3">
           {[301, 501].map((val) => (
             <button
               key={val}
               onClick={() => setScore(val)}
-              className={`flex-1 py-3 rounded-lg font-bold transition-all ${
+              className={`flex-1 py-3 rounded-xl font-bold transition-all shadow-sm ${
                 score === val 
-                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/50' 
-                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  ? 'bg-emerald-500 text-white shadow-emerald-200 ring-2 ring-emerald-500 ring-offset-1' 
+                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
               }`}
             >
               {val}
@@ -69,7 +69,7 @@ export const Setup: React.FC<SetupProps> = ({ onStartGame }) => {
             type="number"
             value={score}
             onChange={(e) => setScore(parseInt(e.target.value) || 0)}
-            className="w-24 bg-slate-900 border border-slate-700 rounded-lg px-3 text-center text-white focus:outline-none focus:border-emerald-500"
+            className="w-24 bg-slate-50 border border-slate-200 rounded-xl px-3 text-center text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all shadow-inner"
             placeholder="Custom"
           />
         </div>
@@ -77,18 +77,18 @@ export const Setup: React.FC<SetupProps> = ({ onStartGame }) => {
 
       {/* Legs */}
       <div className="mb-6">
-        <label className="block text-slate-400 mb-2 text-sm uppercase font-semibold tracking-wider">Number of Legs</label>
-        <div className="flex items-center bg-slate-900 rounded-lg p-1 border border-slate-700">
+        <label className="block text-slate-500 mb-2 text-xs uppercase font-bold tracking-wider">Number of Legs</label>
+        <div className="flex items-center bg-slate-50 rounded-xl p-1 border border-slate-200 shadow-inner">
           <button 
             onClick={() => setLegs(Math.max(1, legs - 1))}
-            className="w-12 h-10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+            className="w-12 h-10 flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-white rounded-lg transition-all font-bold"
           >
             -
           </button>
-          <div className="flex-1 text-center font-bold text-xl">{legs}</div>
+          <div className="flex-1 text-center font-bold text-xl text-slate-700">{legs}</div>
           <button 
             onClick={() => setLegs(legs + 1)}
-            className="w-12 h-10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 rounded"
+            className="w-12 h-10 flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-white rounded-lg transition-all font-bold"
           >
             +
           </button>
@@ -97,21 +97,21 @@ export const Setup: React.FC<SetupProps> = ({ onStartGame }) => {
 
       {/* Players */}
       <div className="mb-8">
-        <label className="block text-slate-400 mb-2 text-sm uppercase font-semibold tracking-wider">Players</label>
+        <label className="block text-slate-500 mb-2 text-xs uppercase font-bold tracking-wider">Players</label>
         <div className="space-y-3 max-h-60 overflow-y-auto pr-1 custom-scrollbar">
           {playerNames.map((name, index) => (
-            <div key={index} className="flex gap-2">
+            <div key={index} className="flex gap-2 group">
               <input
                 type="text"
                 value={name}
                 onChange={(e) => updateName(index, e.target.value)}
-                className="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all shadow-sm"
                 placeholder={`Player ${index + 1}`}
               />
               {playerNames.length > 1 && (
                 <button
                   onClick={() => removePlayer(index)}
-                  className="w-10 flex items-center justify-center text-red-400 hover:bg-red-900/20 rounded-lg transition-colors"
+                  className="w-12 flex items-center justify-center text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors"
                 >
                   ✕
                 </button>
@@ -122,7 +122,7 @@ export const Setup: React.FC<SetupProps> = ({ onStartGame }) => {
         {playerNames.length < 8 && (
           <button
             onClick={addPlayer}
-            className="mt-3 w-full py-2 border-2 border-dashed border-slate-600 text-slate-400 rounded-lg hover:border-slate-500 hover:text-slate-300 transition-all text-sm font-medium"
+            className="mt-3 w-full py-3 border-2 border-dashed border-slate-200 text-slate-400 rounded-xl hover:border-emerald-300 hover:text-emerald-500 hover:bg-emerald-50 transition-all text-sm font-bold tracking-wide"
           >
             + Add Player
           </button>
@@ -131,7 +131,7 @@ export const Setup: React.FC<SetupProps> = ({ onStartGame }) => {
 
       <button
         onClick={handleStart}
-        className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-900/50 transform transition hover:-translate-y-1 active:translate-y-0"
+        className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-200 transform transition hover:-translate-y-1 active:translate-y-0"
       >
         GAME ON!
       </button>
