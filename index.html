@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DartsMaster Scorer</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
     <style>
       body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f8fafc; /* Slate 50 (Light Mode) */
-        color: #1e293b; /* Slate 800 */
         overscroll-behavior: none;
       }
       /* Hide scrollbar for clean mobile look */
@@ -17,7 +20,7 @@
         width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #f1f5f9;
+        background: transparent;
       }
       ::-webkit-scrollbar-thumb {
         background: #cbd5e1;
@@ -35,7 +38,7 @@
 }
 </script>
 </head>
-  <body>
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
     <div id="root"></div>
   </body>
 </html>
