@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DartsMaster Scorer</string>
+    <string name="title_activity_main">DartsMaster Scorer</string>
+    <string name="package_name">com.dartsmaster.scorer</string>
+    <string name="custom_url_scheme">com.dartsmaster.scorer</string>
+</resources>

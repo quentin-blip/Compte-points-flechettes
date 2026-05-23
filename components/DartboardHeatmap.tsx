@@ -41,7 +41,8 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
     const rInnerBull = maxRadius * 0.05;
 
     // Filter throws for this player
-    const playerThrows = history.filter((t) => t.playerId === playerId && !t.isBust);
+    // FIX: Include busted throws to show physical hits on the board
+    const playerThrows = history.filter((t) => t.playerId === playerId);
 
     // Helper to get hit count
     const getHitCount = (scoreValue: number, multiplier: Multiplier): number => {
@@ -74,7 +75,8 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
       }
 
       // GHOST BOARD LOOK
-      const isDark = sliceIndex % 2 !== 0;
+      // FIX: 20 (index 0) should be Dark. Even indices are Dark.
+      const isDark = sliceIndex % 2 === 0;
       
       if (multiplier === Multiplier.Double || multiplier === Multiplier.Triple) {
         // Rings
@@ -102,6 +104,7 @@ export const DartboardHeatmap: React.FC<DartboardHeatmapProps> = ({ history, pla
     const sliceAngle = (2 * Math.PI) / 20;
 
     DARTBOARD_NUMBERS.forEach((num, i) => {
+      // FIX: 20 is at top (0 degrees in D3 arc), so index 0 is at -slice/2 to +slice/2
       const startAngle = i * sliceAngle - sliceAngle / 2;
       const endAngle = startAngle + sliceAngle;
 

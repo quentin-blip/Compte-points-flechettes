@@ -7,9 +7,9 @@ export enum Multiplier {
 export interface Throw {
   playerId: string;
   legId: number;
-  scoreValue: number; // The raw number (e.g., 20)
+  scoreValue: number;
   multiplier: Multiplier;
-  totalPoints: number; // value * multiplier
+  totalPoints: number;
   isBust: boolean;
   isWin: boolean;
   timestamp: number;
@@ -28,17 +28,29 @@ export enum GameStatus {
   Summary,
 }
 
+export enum GameMode {
+  Match = 'MATCH',
+  Training = 'TRAINING'
+}
+
 export interface GameConfig {
+  mode: GameMode;
   startingScore: number;
   totalLegs: number;
   players: Player[];
+  trainingConfig?: {
+    targetZones: number[];
+    maxDarts: number;
+  };
 }
 
 export interface GameState {
   status: GameStatus;
   currentLeg: number;
   currentPlayerIndex: number;
-  turnThrows: Throw[]; // Throws in the current turn (max 3)
-  history: Throw[]; // All throws in the game
+  legStarterIndex: number;
+  turnThrows: Throw[];
+  history: Throw[];
   scoreAtStartOfTurn: number;
+  finishedPlayerIds: string[]; 
 }

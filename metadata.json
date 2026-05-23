@@ -1,5 +1,6 @@
 {
   "name": "DartsMaster Scorer",
-  "description": "A comprehensive, responsive darts scoring application with 301/501 modes, detailed history, and post-game heatmap analytics.",
-  "requestFramePermissions": []
+  "description": "A comprehensive, responsive darts scoring application and Android app (via Capacitor) featuring 301/501 modes, detailed history, and post-game heatmap analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
